@@ -1,0 +1,14 @@
+<div mat-dialog-content>
+  <mat-form-field>
+    <input matInput placeholder="Title" [(ngModel)]="data.name">
+  </mat-form-field>
+  <mat-form-field>
+    <mat-select placeholder="select a badge" [(ngModel)]="data.badge">
+      <mat-option *ngFor="let badge of defaultSelections" [value]="badge">{{ badge }}</mat-option>
+    </mat-select>
+  </mat-form-field>
+</div>
+<mat-dialog-actions>
+  <button mat-button (click)="onNoClick()">Cancel</button>
+  <button mat-raised-button [mat-dialog-close]="data" color="primary" cdkFocusInitial>Save</button>
+</mat-dialog-actions>

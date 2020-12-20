@@ -1,0 +1,100 @@
+<div class="container">
+  <div class="row justify-content-end">
+    <div class="col align-self-end col-lg-4 filter">
+      <form class="searchform">
+        <mat-form-field class="search">
+          <mat-icon matPrefix>search</mat-icon>
+          <input type="search" placeholder="search" matInput [formControl]="myControl" [matAutocomplete]="auto">
+          <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
+            <mat-option *ngFor="let data of filteredOptions | async" [value]="data">
+              {{data.name}}
+            </mat-option>
+          </mat-autocomplete>
+        </mat-form-field>
+      </form>
+    </div>
+  </div>
+
+  <div class="favourire-class">
+    <mat-expansion-panel class="expand" (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          Favourites
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+      <div class="row">
+        <div class="dataArray col-lg-4 col-md-6 col-xs-8 col-xs-12" *ngFor="let data of favouritesArray; let i=index;">
+          <mat-card class="example-card">
+            <table>
+              <tr>
+                <th rowspan="0">
+                  <mat-card-title>LK</mat-card-title>
+                </th>
+                <th colspan="4" class="title">{{data.name}}</th>
+                <td width="30%">
+                  <mat-icon class="favourites" (click)="removeFavoutires(data,i)">grade</mat-icon>
+                </td>
+              </tr>
+              <tr>
+                <td *ngIf="(data.badge == 'defined')"><mat-icon style="color:lightgrey">access_time</mat-icon></td>
+                <td *ngIf="(data.badge == 'inProgress')"><mat-icon style="color:rgb(228, 86, 86)">pause_circle_outline</mat-icon></td>
+                <td class="defined-margin" *ngIf="(data.badge == 'defined')"><span class="defined">Defined</span></td>
+                <td class="defined-margin" *ngIf="(data.badge == 'inProgress')"><span
+                    class="inProgress">inProgress</span></td>
+                <td>Progress:</td>
+                <td>
+                  <mat-progress-bar mode="determinate" value="0"></mat-progress-bar>
+                </td>
+                <td>0%</td>
+              </tr>
+            </table>
+          </mat-card>
+        </div>
+      </div>
+    </mat-expansion-panel>
+  </div>
+
+  <div class="workflow-class">
+    <mat-expansion-panel class="expand" (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+      <mat-expansion-panel-header class="workflow">
+        <mat-panel-title>
+          Workflows
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+      <div class="row">
+        <div class="dataArray col-lg-4 col-md-6 col-xs-8 col-xs-12" *ngFor="let data of dataArray; let i=index;">
+          <mat-card class="example-card">
+            <table>
+              <tr>
+                <th rowspan="0">
+                  <mat-card-title>LK</mat-card-title>
+                </th>
+                <th colspan="3" class="title">{{data.name}}</th>
+                <td width="30%">
+                  <mat-icon class="unfavourites" (click)="addFavoutires(data, i)">grade</mat-icon>
+                </td>
+              </tr>
+              <tr>
+                <td *ngIf="(data.badge == 'defined')"><mat-icon style="color:lightgrey">access_time</mat-icon></td>
+                <td *ngIf="(data.badge == 'inProgress')"><mat-icon style="color:rgb(228, 86, 86)">pause_circle_outline</mat-icon></td>
+                <td class="defined-margin" *ngIf="(data.badge == 'defined')"><span class="defined">Defined</span></td>
+                <td class="defined-margin" *ngIf="(data.badge == 'inProgress')"><span
+                    class="inProgress">inProgress</span></td>
+                <td>Progress:</td>
+                <td>
+                  <mat-progress-bar mode="determinate" value="0"></mat-progress-bar>
+                </td>
+                <td>0%</td>
+              </tr>
+            </table>
+          </mat-card>
+        </div>
+      </div>
+    </mat-expansion-panel>
+  </div>
+  <div>
+    <button mat-button class="createButton" (click)="addData()">
+      <mat-icon>add_circle_outline</mat-icon> Workflow
+    </button>
+  </div>
+</div>
